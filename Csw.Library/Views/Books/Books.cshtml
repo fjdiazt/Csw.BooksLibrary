@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Csw.Library.Core.Entities.Book>
+
+@{
+    Layout = null;
+}
+
+<ul>
+    @foreach ( var book in Model )
+    {
+        <li>@book.Title</li>
+    }
+</ul>

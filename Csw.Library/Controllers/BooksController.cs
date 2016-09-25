@@ -29,5 +29,14 @@ namespace Csw.Library.Controllers
 
             return View( model );
         }
+
+        public async Task<ActionResult> BooksByAuthor(int authorId)
+        {
+            var books = authorId == 0
+                ? await BookService.AllAsync()
+                : await BookService.GetByAuthor(authorId);
+
+            return View("Books", books );
+        }
     }
 }

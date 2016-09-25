@@ -203,6 +203,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Books\Books.cshtml" />
     <None Include="Views\Books\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

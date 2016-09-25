@@ -3,20 +3,45 @@
 
 <h1>Books</h1>
 
-<select>
-    @foreach (var author in Model.Authors)
+<label for="authorId">Author</label>
+<select id="authorId">
+    <option value="0" selected="selected">-- All --</option>
+    @foreach ( var author in Model.Authors )
     {
         <option value="@author.Id">@author.FullName</option>
     }
 </select>
 
-<ul>
-    @foreach (var book in Model.Books)
-    {
-        <li>@book.Title</li>
-    }
-</ul>
+<div id="books">
+</div>
 
-<script language="javascript">
-    
-</script>
+@section js
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            function loadBooksView(authorId) {
+                var url = "@Url.Action( "BooksByAuthor")";
+
+                $.get(url,
+                    { "authorId": authorId },
+                    function (html) {
+                        $("#books").html(html);
+                    });
+            }
+
+            function initAuthorSelect() {
+                $("#authorId")
+                    .change(function () {
+                        var selectedId = $("#authorId option:selected").val();
+                        loadBooksView(selectedId);
+                    });
+
+                $("#authorId").trigger("change");
+            }
+
+
+            initAuthorSelect();
+        })
+    </script>
+}
