@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csw.Library", "Csw.Library\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csw.Library.Tests", "Csw.Library.Tests\Csw.Library.Tests.csproj", "{1166FDA3-FD13-4F2B-97B8-1D51EC1C39FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Csw.Library.Core", "Csw.Library.Core\Csw.Library.Core.csproj", "{EBB21743-5531-46CA-A4C7-2FEE2035F093}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1166FDA3-FD13-4F2B-97B8-1D51EC1C39FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1166FDA3-FD13-4F2B-97B8-1D51EC1C39FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1166FDA3-FD13-4F2B-97B8-1D51EC1C39FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB21743-5531-46CA-A4C7-2FEE2035F093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB21743-5531-46CA-A4C7-2FEE2035F093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB21743-5531-46CA-A4C7-2FEE2035F093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB21743-5531-46CA-A4C7-2FEE2035F093}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,22 @@
+﻿@model Csw.Library.Models.BooksIndexModel
+
+
+<h1>Books</h1>
+
+<select>
+    @foreach (var author in Model.Authors)
+    {
+        <option value="@author.Id">@author.FullName</option>
+    }
+</select>
+
+<ul>
+    @foreach (var book in Model.Books)
+    {
+        <li>@book.Title</li>
+    }
+</ul>
+
+<script language="javascript">
+    
+</script>
