@@ -4,11 +4,32 @@
     Layout = null;
 }
 
-<ul>
-    @foreach ( var book in Model )
+<div class="row books-gallery">
+    @foreach (var book in Model)
     {
-        <li>@book.Title | @Html.ActionLink( "Edit", "Edit", new { id = book.Id } ) |
-        @Html.ActionLink( "Details", "Details", new { id = book.Id } ) |
-        @Html.ActionLink( "Delete", "Delete", new { id = book.Id } )</li>
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb book-container">
+            <h4>@book.Title</h4>
+            <a class="thumbnail" href="@Url.Action("Details", new {id=book.Id})">
+                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            </a>
+            <p>Author: @book.Author.FullName | Category: @book.Category.Name</p>
+        </div>
     }
-</ul>
+</div>
+
+@{/* TODO: Move this to dedicated css */}
+<style>
+    .book-container a {
+         margin-bottom: 0px;   
+     }
+    .book-container {
+        text-align: center;
+    }
+    .book-container h4 {        
+        font-weight: bold;
+    }
+    .book-container p {
+        margin-top: 0px;
+        margin-bottom: 20px;  
+    }
+</style>

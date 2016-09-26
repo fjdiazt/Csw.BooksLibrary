@@ -54,6 +54,7 @@ namespace Csw.Library
 
             bundles.Add( new StyleBundle( "~/Content/css" ).Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-thumbnail-gallery/thumbnail-gallery.css",
                       "~/Content/site.css" ) );
         }
 

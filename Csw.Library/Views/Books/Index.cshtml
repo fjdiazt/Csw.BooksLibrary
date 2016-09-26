@@ -1,22 +1,43 @@
 ﻿@model Csw.Library.Models.BooksIndexModel
 
+@{
+    ViewBag.Title = "Books";
+    ViewBag.SubTitle = "Library";
+}
 
-<h1>Books</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.SubTitle</h3>
+            </div>
+            <div class="box-body">
+                <div class="btn-toolbar">
+                    @Html.ActionLink( "Create New", "Create", null, new Dictionary<string, object> { { "class", "btn btn-primary" } } )
+                </div>
 
-<p>
-    @Html.ActionLink( "Create New", "Create" )
-</p>
+                <br/>
 
-<label for="authorId">Author</label>
-<select id="authorId">
-    <option value="0" selected="selected">-- All --</option>
-    @foreach ( var author in Model.Authors )
-    {
-        <option value="@author.Id">@author.FullName</option>
-    }
-</select>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="authorId">Author</label>
+                            <select id="authorId" class="form-control">
+                                <option value="0" selected="selected">-- All --</option>
+                                @foreach ( var author in Model.Authors )
+                                {
+                                    <option value="@author.Id">@author.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-<div id="books">
+                <div id="books">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts
