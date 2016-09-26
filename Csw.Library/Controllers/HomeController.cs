@@ -6,7 +6,7 @@ namespace Csw.Library.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Books");
+            return View();
         }
     }
 }
