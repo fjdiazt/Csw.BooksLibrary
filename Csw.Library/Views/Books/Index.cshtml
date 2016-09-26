@@ -3,6 +3,10 @@
 
 <h1>Books</h1>
 
+<p>
+    @Html.ActionLink( "Create New", "Create" )
+</p>
+
 <label for="authorId">Author</label>
 <select id="authorId">
     <option value="0" selected="selected">-- All --</option>
@@ -15,7 +19,7 @@
 <div id="books">
 </div>
 
-@section js
+@section Scripts
 {
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {

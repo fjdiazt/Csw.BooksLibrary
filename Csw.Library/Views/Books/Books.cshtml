@@ -7,6 +7,8 @@
 <ul>
     @foreach ( var book in Model )
     {
-        <li>@book.Title</li>
+        <li>@book.Title | @Html.ActionLink( "Edit", "Edit", new { id = book.Id } ) |
+        @Html.ActionLink( "Details", "Details", new { id = book.Id } ) |
+        @Html.ActionLink( "Delete", "Delete", new { id = book.Id } )</li>
     }
 </ul>
