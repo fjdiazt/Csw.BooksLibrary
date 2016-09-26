@@ -3,6 +3,7 @@ using Csw.Library.Core.Entities;
 
 namespace Csw.Library.Data
 {
+    [DbConfigurationType( typeof( CswDbConfiguration ) )]
     public class CswContext : DbContext
     {
         public CswContext()
