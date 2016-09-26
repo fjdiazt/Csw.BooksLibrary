@@ -1,119 +1,114 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Csw.Library.Core.Entities;
 using Csw.Library.Data;
 
-namespace Csw.Library
+namespace Csw.Library.Controllers
 {
-    public class CategoriesController : Controller
+    public class AuthorsController : Controller
     {
-        private CswContext db = new CswContext();
+        private readonly CswContext _db = new CswContext();
 
-        // GET: Categories
+        // GET: Authors
         public async Task<ActionResult> Index()
         {
-            return View(await db.Categories.ToListAsync());
+            return View(await _db.Authors.ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        // GET: Authors/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Author author = await _db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(author);
         }
 
-        // GET: Categories/Create
+        // GET: Authors/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Authors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] Category category)
+        public async Task<ActionResult> Create([Bind(Include = "Id,FirstName,LastName")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                await db.SaveChangesAsync();
+                _db.Authors.Add(author);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(author);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Authors/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Author author = await _db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(author);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] Category category)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(author).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(author);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Authors/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = await db.Categories.FindAsync(id);
-            if (category == null)
+            Author author = await _db.Authors.FindAsync(id);
+            if (author == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(author);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Authors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Category category = await db.Categories.FindAsync(id);
-            db.Categories.Remove(category);
-            await db.SaveChangesAsync();
+            Author author = await _db.Authors.FindAsync(id);
+            _db.Authors.Remove(author);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -121,7 +116,7 @@ namespace Csw.Library
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -17,18 +17,26 @@ namespace Csw.Library.Services
         }
 
 
-        public async Task<IEnumerable<Book>> AllAsync()
+        public async Task<IEnumerable<Book>> GetAllAsync()
         {
             return await _context.Books
                 .OrderBy( b => b.Title )
                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Book>> GetByAuthor( int authorId )
+        public async Task<IEnumerable<Book>> GetByAuthorAsync( int authorId )
         {
             return await _context.Books
                 .OrderBy( b => b.Title )
                 .Where( b => b.AuthorId == authorId )
+                .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Book>> GetByCategoryAsync(int categoryId)
+        {
+            return await _context.Books
+                .OrderBy(b => b.Title)
+                .Where(b => b.CategoryId == categoryId)
                 .ToArrayAsync();
         }
     }

@@ -11,7 +11,7 @@ namespace Csw.Library.Controllers
 {
     public class BooksController : Controller
     {
-        private CswContext db = new CswContext();
+        private readonly CswContext _db;
 
         // GET: Books
         private BookService BookService { get; set; }
@@ -20,16 +20,16 @@ namespace Csw.Library.Controllers
 
         public BooksController()
         {
-            var context = new CswContext();
-            BookService = new BookService( context );
-            AuthorService = new AuthorService( context );
+            _db = new CswContext();
+            BookService = new BookService( _db );
+            AuthorService = new AuthorService( _db );
         }
 
         public async Task<ActionResult> Index()
         {
             var model = new BooksIndexModel
             {
-                Books = await BookService.AllAsync(),
+                Books = await BookService.GetAllAsync(),
                 Authors = await AuthorService.AllAsync(),
             };
 
@@ -39,8 +39,8 @@ namespace Csw.Library.Controllers
         public async Task<ActionResult> BooksByAuthor( int authorId )
         {
             var books = authorId == 0
-                ? await BookService.AllAsync()
-                : await BookService.GetByAuthor( authorId );
+                ? await BookService.GetAllAsync()
+                : await BookService.GetByAuthorAsync( authorId );
 
             return View( "Books", books );
         }
@@ -52,7 +52,7 @@ namespace Csw.Library.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
+            Book book = await _db.Books.FindAsync(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -63,8 +63,8 @@ namespace Csw.Library.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName");
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            ViewBag.AuthorId = new SelectList(_db.Authors, "Id", "FirstName");
+            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "Name");
             return View();
         }
 
@@ -77,13 +77,13 @@ namespace Csw.Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
-                await db.SaveChangesAsync();
+                _db.Books.Add(book);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
+            ViewBag.AuthorId = new SelectList(_db.Authors, "Id", "FirstName", book.AuthorId);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -94,13 +94,13 @@ namespace Csw.Library.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
+            Book book = await _db.Books.FindAsync(id);
             if (book == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
+            ViewBag.AuthorId = new SelectList(_db.Authors, "Id", "FirstName", book.AuthorId);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -113,12 +113,12 @@ namespace Csw.Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(book).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", book.AuthorId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", book.CategoryId);
+            ViewBag.AuthorId = new SelectList(_db.Authors, "Id", "FirstName", book.AuthorId);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -129,7 +129,7 @@ namespace Csw.Library.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
+            Book book = await _db.Books.FindAsync(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -142,9 +142,9 @@ namespace Csw.Library.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Book book = await db.Books.FindAsync(id);
-            db.Books.Remove(book);
-            await db.SaveChangesAsync();
+            Book book = await _db.Books.FindAsync(id);
+            _db.Books.Remove(book);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -152,7 +152,7 @@ namespace Csw.Library.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

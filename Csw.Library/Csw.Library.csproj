@@ -139,11 +139,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AuthorsController.cs" />
-    <Compile Include="BooksApiController.cs" />
+    <Compile Include="Controllers\AuthorsController.cs" />
+    <Compile Include="Controllers\BooksApiController.cs" />
     <Compile Include="Controllers\ApiDemoController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
-    <Compile Include="CategoriesController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Services\AuthorService.cs" />
     <Compile Include="Services\BookService.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -213,6 +213,9 @@
     <Content Include="Views\Authors\Details.cshtml" />
     <Content Include="Views\Authors\Edit.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
+    <None Include="Views\ApiDemo\BooksByAuthor.cshtml" />
+    <None Include="Views\ApiDemo\Books.cshtml" />
+    <None Include="Views\ApiDemo\BooksByCategory.cshtml" />
     <None Include="Views\Books\Books.cshtml" />
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Delete.cshtml" />

@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "API Demo";
+    ViewBag.SubTitle = "Books by Category";
+}
+
+@{
+    const string url = "/api/books/category/1";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.SubTitle</h3>
+            </div>
+            <div class="box-body">
+                <div>
+                    <code lang="javascript">
+                        url: "@url"
+                    </code>
+                </div>
+                <hr />
+                <div id="result">
+                    <pre></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $.get("@url",
+                function(data) {
+                    $("#result pre").html(JSON.stringify(data, undefined, 2));
+                });
+        })
+    </script>
+}
